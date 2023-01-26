@@ -1,0 +1,90 @@
+.showMore{
+
+    font-size: 2rem;
+margin: 5px;
+
+
+}
+/*.divShow{*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    margin: 10px;*/
+
+/*}*/
+
+.user{
+    /*max-width: 10%;*/
+    display: flex;
+    flex-direction:row ;
+    margin: 5px;
+}
+
+.avImg{
+    width: 50px;
+    height: 50px;
+    background: none;
+padding: 5%;
+    min-height: 50px;
+
+
+}
+
+.userName{
+    border: thin solid black;
+    border-radius: 10px;
+    width: 90%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+
+}
+
+.info{
+
+    padding: 5px;
+    font-size: 0.75rem;
+    font-style: italic;
+    /*width: 60%;*/
+}
+.name{
+    font-size: 2rem;
+    /*width: 55%;*/
+    padding: 5px;
+
+}
+.country{
+    font-size: 1.5rem;
+    /*width: 30%;*/
+    padding: 5px;
+    text-align: right;
+}
+.city{
+    font-size: 1rem;
+    /*width: 30%;*/
+    padding: 5px;
+    text-align: right;
+}
+.follow{
+    /*background-color: mediumaquamarine;*/
+    /*color: white;*/
+    /*border: thin solid mediumaquamarine;;*/
+    /*border-radius: 5px;*/
+    width: 100px;
+
+}
+.page, .selectedPage{
+    padding: 5px;
+
+}
+.selectedPage{
+
+    font-weight: bold;
+
+}
+.page:hover ,.selectedPage:hover{
+    cursor: pointer;
+}
+.numberPage{
+    display: inline-block;
+
+}

@@ -1,0 +1,31 @@
+.header{
+    grid-area: h;
+    background-color: mediumaquamarine;
+
+
+}
+.img{
+width: 3em;
+    margin: 0 auto;
+    /*background: mediumaquamarine;*/
+    vertical-align: center;
+    padding: 20px;
+    width: 50px;
+    height: 50px;
+    /*display: flex;*/
+    /*align-items: center;*/
+
+
+}
+.loginBlock{
+   float: right;
+    margin: 10px;
+}
+.loginBlock a{
+    color: white;
+
+}
+.loginBlock div{
+    color: white;
+
+}

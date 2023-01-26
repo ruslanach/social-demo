@@ -1,0 +1,63 @@
+.showMore{
+
+    font-size: 1.5rem;
+margin: 5px;
+    height: 40px;
+
+}
+.bottomButton{
+
+    font-size: 1.5rem;
+    margin: 5px;
+    height: 40px;
+    color: darkseagreen;
+
+}
+/*.page, .selectedPage{*/
+/*    padding: 5px;*/
+/*    border-color: black;*/
+/*}*/
+.selectedPage{
+
+    font-weight: bold;
+   color: green;
+    font-size: 1.3rem;
+
+}
+.page:hover ,.selectedPage:hover{
+    cursor: pointer;
+}
+.numberPage{
+    display: inline-block;
+    /*border: grey;*/
+    margin: 5px;
+    padding-top: 5px;
+    /*border: 1px solid grey;*/
+    justify-content: center;
+    text-align: center;
+    /*min-width: 50px;*/
+    /*height: 33px;*/
+    /*width: 35px;*/
+    font-size: 1.1rem;
+    color: blue;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+
+}
+.pageNumber {
+    padding: 2px;
+    border: 1px solid aqua;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+}
+
+.selectedPage {
+    font-weight: bold;
+    border-color: black;
+}
