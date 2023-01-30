@@ -44,11 +44,12 @@ export const getAuth = () => async (dispatch) => {
         let {id, login, email} = response.data;
         dispatch(setUsersData(id, login, email, true));
     }
-
+    // dispatch(setUsersData('27003', 'Ruslana Chaika', 'ruslanapt@gmail.com', true));
 }
 export const login = (email, password, rememberMe) => async (dispatch) => {
 
     dispatch(setIsFetching(true));
+
     let response = await authAPI.login(email, password, rememberMe);
 
     dispatch(setIsFetching(false));
@@ -76,4 +77,5 @@ export const logout = () => async (dispatch) => {
     }
 
 }
+
 export default authReducer

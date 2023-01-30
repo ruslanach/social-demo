@@ -5,8 +5,8 @@
 
 }
 .profileLogo{
-    width: 20%px;
-    height: 20%px;
+    width: 80%;
+    height: 80%;
     padding: 1%;
 }
 .profileInfo{
@@ -41,3 +41,7 @@ color: blue;
 .status{
 
 }
+.job{
+    font-size: 1.3rem;
+     padding: 10px;
+ }

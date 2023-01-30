@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, HashRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -16,6 +16,7 @@ import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/preloader";
 import store from "./redux/reduxStore";
  import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import ProfileForm from "./components/Profile/ProfileInfo/ProfileForm/ProfileForm";
 
 // import {withSuspense} from './hoc/withSuspense'
 // const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
@@ -47,8 +48,9 @@ class App extends Component {
                 //   </header>
                 // </div>
 
-                <BrowserRouter>
-                    <div className='app-wrapper'>
+                <BrowserRouter basename={process.env.PUBLIC}>
+                    {/*<BrowserRouter>                   */}
+                        <div className='app-wrapper'>
                         <HeaderContainer/>
                         <NavBarContainer/>
 
@@ -66,6 +68,8 @@ class App extends Component {
                                 <Route path="/settings/" element={<Settings/>}/>
                                 <Route path="/users/*" element={<UsersContainer/>}/>
                                 <Route path="/login/" element={<Login/>}/>
+                                <Route path="/changeProfile/" element={<ProfileForm/>}/>
+                                <Route path="/external-link" element={<External />}/>
                             </Routes>
 
                         </div>
@@ -74,6 +78,11 @@ class App extends Component {
             );
         } else {return <Preloader />}
     }
+}
+let External =(props)=> {
+    // window.location.href = props;
+    window.location.href = 'https://google.com';
+    return null;
 }
 let mapStateToProps =(state) =>{
 

@@ -18,7 +18,7 @@ let initialState ={
         {id: 6, idUser: 3, message: 'Andrii 1'},
         {id: 7, idUser: 4, message: 'Diana 1'}],
     newMessageText: 'new message',
-    currentUserId: 1
+    currentUserId: null
 };
 export const dialogsReducer =(state=initialState, action)=>{
     let stateCopy ={...state};

@@ -6,6 +6,7 @@ const SET_USER_PROFILE ='SET_USER_PROFILE';
 const SET_USER_STATUS ='SET_USER_STATUS';
 const TOGGLE_IS_FETCHING='TOGGLE_IS_FETCHING'
 const DELETE_POST='DELETE_POST'
+const SAVE_PHOTO_SUCCESS='SAVE_PHOTO_SUCCESS'
 let initialState ={
     userProfile: null,
     isFetching: false,
@@ -55,6 +56,10 @@ export const profileReducer = (state=initialState, action) => {
 
                 stateCopy.userProfile = {...action.userProfile}
                 break;
+                case SAVE_PHOTO_SUCCESS:
+
+                stateCopy.userProfile = {...state.userProfile,photos:action.photos}
+                break;
             case TOGGLE_IS_FETCHING:
                 stateCopy.isFetching=action.isFetching;
         }
@@ -69,13 +74,31 @@ export const setUserStatus = (status) => ({type: SET_USER_STATUS,status})
 export const updateNewPost = (text) =>
     ({type: UPDATE_NEW_POST_TEXT, newPostText: text})
 export const setIsFetching = (isFetching) =>  ({type: TOGGLE_IS_FETCHING,isFetching})
-
+export const savePhotoSuccess = (photos) =>  ({type: SAVE_PHOTO_SUCCESS,photos})
 export const putUserProfile =(userId) => async (dispatch) =>{
 
     dispatch(setIsFetching(true));
     let data = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(data));
     dispatch(setIsFetching(false));
+
+
+}
+
+export const changeProfile = (userProfile) => async (dispatch) => {
+
+    dispatch(setIsFetching(true));
+
+    let response = await profileAPI.saveProfile(userProfile);
+
+    dispatch(setIsFetching(false));
+
+    if (response.resultCode === 0) {
+        const userId = userProfile.userId;
+        dispatch(putUserProfile(userId));
+        dispatch(setIsFetching(false));
+    }
+
 
 
 }
@@ -88,8 +111,20 @@ export const putUserStatus = (status) => async (dispatch) => {
 }
 export const getUserStatus = (userId) => async (dispatch) => {
 
-    let data = await profileAPI.getStatus(userId)
+    let data = await profileAPI.getStatus(userId);
     dispatch(setUserStatus(data));
     // dispatch(setIsFetching(false));
+
+}
+export const savePhoto = (fileName) => async (dispatch) => {
+
+    let data = await profileAPI.savePhotoFromFile(fileName);
+
+    if (data.resultCode === 0) {
+        dispatch(savePhotoSuccess(data.data.photos));
+    }
+
+
+
 
 }

@@ -3,7 +3,16 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import DialogsComponent from "./DialogsComponent";
+import {useParams} from "react-router-dom";
+import React from "react";
+export function withRouter(Children) {
+    return (props) => {
 
+        const match = {params: useParams()};
+        return <Children {...props} match={match}/>
+    }
+}
 let mapStateToProps =(state) =>{
     return {
         dialogs:state.dialogs,
@@ -19,8 +28,9 @@ let mapStateToProps =(state) =>{
 // }
 export default compose(
     connect(mapStateToProps,    { addMessage, updateNewMessageText,updateCurrentUser }),
+    withRouter,
     withAuthRedirect
-)(Dialogs)
+)(DialogsComponent)
 // export let AuthRedirectComponent = withAuthRedirect(Dialogs);
 // const DialogsContainer = connect(mapStateToProps,
 //     { addMessage, updateNewMessageText })(Dialogs);

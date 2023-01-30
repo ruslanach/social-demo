@@ -45,7 +45,7 @@ let Paginator = (props) => {
                   {pages
                     .filter(page => page >= leftPortionPageNumber && page<=rightPortionPageNumber)
                     .map((p) => {
-                        return <div className={classes.numberPage}>
+                        return <div className={classes.numberPage} key={p}>
                             <span
                                 className={props.currentPage === p && classes.selectedPage}
                                 onClick={(e) => {

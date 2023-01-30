@@ -64,11 +64,11 @@ import React from "react";
 // }
 const LoginForm = (props) => {
     // console.log(props)
-    const initialData={
-        email:'aaaaa@gmail.com'
+    const initialData = {
+        email: 'aaaaa@gmail.com'
     }
     const onSubmit = (value) => {
-props.login(value.email,value.password,false);
+        props.login(value.email, value.password, false);
 
     }
     const validate = (value) => {
@@ -87,12 +87,14 @@ props.login(value.email,value.password,false);
             onSubmit={onSubmit}
             validate={validate}
             initialValues={initialData}
-            render={({        submitError,
+            render={({
+                         submitError,
                          handleSubmit,
                          form,
                          submitting,
                          pristine,
-                         values}) => (
+                         values
+                     }) => (
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Login</label>
@@ -129,7 +131,7 @@ props.login(value.email,value.password,false);
                     </div>
                     <div>
                         <label>remember me</label>
-                        <Field name="rememberMe" component="input" type="checkbox" />
+                        <Field name="rememberMe" component="input" type="checkbox"/>
 
                     </div>
                     <div>
@@ -151,7 +153,7 @@ const Login = (props) => {
 
     )
 }
-const mapStateToProps =(state)  => ({
-isAuth: state.auth.isAuth
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
 })
-export default connect(mapStateToProps,{login,logout}) (Login);
+export default connect(mapStateToProps, {login, logout})(Login);

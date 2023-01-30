@@ -28,7 +28,7 @@ export const authAPI = {
     },
     logout (email,password,rememberMe) {
         return instance.delete(`auth/login` ).then(response => response.data);
-    }
+    } ,
 }
 export const profileAPI = {
 
@@ -40,5 +40,18 @@ export const profileAPI = {
     },
     putStatus (status){
         return instance.put(`profile/status`,{status:status}).then(response => response.data);
+    },
+    savePhotoFromFile (photoFile){
+        const formData = new FormData();
+        formData.append("image", photoFile);
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    .then(response => response.data);
+    },
+    saveProfile (userProfile) {
+        return instance.put(`profile`, userProfile ).then(response => response.data);
     }
 }

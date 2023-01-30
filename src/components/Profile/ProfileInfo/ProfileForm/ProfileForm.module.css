@@ -1,0 +1,13 @@
+.error {
+    color:darkred;
+}
+.contact {
+    padding-left: 10px;
+}
+.line {
+    display: flex;
+  justify-content: flex-start;
+ }
+.label {
+    width: 20%;
+}

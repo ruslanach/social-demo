@@ -3,18 +3,27 @@ import backgroundBig from '../../../images/backgroundbig.jpg'
 import userPicture from "../../../images/user.png";
 import React from "react";
 import Preloader from "../../common/preloader";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitterSquare, faFacebook,  faGithub, faInstagram,faYoutube } from "@fortawesome/free-brands-svg-icons"
-import {NavLink} from "react-router-dom";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faTwitterSquare, faFacebook, faGithub, faInstagram, faYoutube} from "@fortawesome/free-brands-svg-icons"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-
+import {ExternalLink} from 'react-external-link';
+import {NavLink} from "react-router-dom";
 
 
 const ProfileInfo = (props) => {
-
+    // console.log(props.userProfile)
     if (!props.userProfile) {
         return <Preloader/>
     }
+    const mainPhotoSelected = (e) => {
+
+        if (e.target.files.length) {
+            props.savePhoto(e.target.files[0]);
+        }
+
+
+    }
+
     return (
         <div>
             <div>
@@ -29,30 +38,94 @@ const ProfileInfo = (props) => {
                     <img className={classes.profileLogo} alt={'userPicture'}
                          src={props.userProfile.photos.large != null ? props.userProfile.photos.large : userPicture}/>
 
-
-
+                    {props.isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
+                    {/*{props.isOwner && <NavLink to={'/changeProfile'}>Change profile</NavLink>}*/}
+                    <div className={classes.job}>
+                        {props.isOwner && <NavLink to={'/changeProfile'}>Change profile</NavLink>}
+                    </div>
                 </div>
-                <div className={classes.info}>
-                    <div className={classes.name}>{props.userProfile.fullName}</div>
-                    <div className={classes.about}>{props.userProfile.aboutMe}</div>
-                    <div>
-                        <div className={classes.icons}>
 
-                            <NavLink to={props.userProfile.contacts.facebook}><FontAwesomeIcon icon={faFacebook} style={{ color: 'blue' }}/></NavLink>
-                            <NavLink to={props.userProfile.contacts.twitter}><FontAwesomeIcon icon={faTwitterSquare} style={{ color: 'blue' }}/></NavLink>
-                            <NavLink to={props.userProfile.contacts.github}><FontAwesomeIcon icon={faGithub} style={{ color: 'darkviolet' }}/></NavLink>
-                            <NavLink to={props.userProfile.contacts.instagram}><FontAwesomeIcon icon={faInstagram} style={{ color: 'red' }}/></NavLink>
-                            <NavLink to={props.userProfile.contacts.youtube}><FontAwesomeIcon icon={faYoutube} style={{ color: 'red' }}/></NavLink>
-
-                        </div>
-                 </div>
-                    {/*<img src={myAva} alt={'avatar'}*/}
-                </div>
+         <ProfileData {...props}/>
                 {/*     className={classes.profileLogo}/>*/}
                 {/*<p>About me</p>    */}
 
             </div>
         </div>
     )
+}
+const ProfileData =(props) =>{
+return (
+
+        <div className={classes.info}>
+            <div className={classes.name}>{props.userProfile.fullName}</div>
+            <div className={classes.about}>{props.userProfile.aboutMe}</div>
+            <div className={classes.job}>
+                <b>Looking for a job</b>: {props.userProfile.lookingForAJob ? "yes" : "no"}
+            </div>
+            {props.userProfile.lookingForAJob &&
+                <div className={classes.job}>
+                    <b>My professional skills</b>: {props.userProfile.lookingForAJobDescription}
+                </div>
+            }
+
+            <div>
+                <div className={classes.icons}>
+                    {/*<a href='www.facebook.com'  target="_blank">*/}
+                    {/*    <FontAwesomeIcon icon={faFacebook} style={{ color: 'blue' }}/>*/}
+                    {/*</a>*/}
+                    {/*<a href={props.userProfile.contacts.facebook!==null ?props.userProfile.contacts.facebook:'www.facebook.com'}  target="_blank">*/}
+                    {/*    <FontAwesomeIcon icon={faFacebook} style={{ color: 'blue' }}/>*/}
+                    {/*</a>   */}
+                    {!!props.userProfile.contacts.facebook &&
+                        <div>
+                            <ExternalLink href={props.userProfile.contacts.facebook}>
+                                <FontAwesomeIcon icon={faFacebook} style={{color: 'blue'}}/>
+                            </ExternalLink>
+                        </div>
+                    }
+                    {!!props.userProfile.contacts.twitter &&
+                        <div>
+                            <ExternalLink href={props.userProfile.contacts.twitter}>
+                                <FontAwesomeIcon icon={faTwitterSquare} style={{color: 'blue'}}/>
+                            </ExternalLink>
+                        </div>
+                    }
+                    {!!props.userProfile.contacts.github &&
+                        <div>
+                            <ExternalLink href={props.userProfile.contacts.github}>
+                                <FontAwesomeIcon icon={faGithub} style={{color: 'darkviolet'}}/>
+                            </ExternalLink>
+                        </div>
+
+                    }
+                    {!!props.userProfile.contacts.instagram &&
+                        <div>
+                            <ExternalLink href={props.userProfile.contacts.instagram}>
+                                <FontAwesomeIcon icon={faInstagram} style={{color: 'red'}}/>
+                            </ExternalLink>
+                        </div>
+                    }
+                    {!!props.userProfile.contacts.youtube &&
+                        <div>
+                            <ExternalLink href={props.userProfile.contacts.youtube}>
+                                <FontAwesomeIcon icon={faYoutube} style={{color: 'red'}}/>
+                            </ExternalLink>
+                        </div>
+                    }
+
+                       {/*  <NavLink to={props.userProfile.contacts.facebook!==null ?'https://'+props.userProfile.contacts.facebook:'https://'+'www.facebook.com'} target="_blank"><FontAwesomeIcon icon={faFacebook} style={{ color: 'blue' }}/></NavLink>*/}
+                    {/*<NavLink to={props.userProfile.contacts.twitter}><FontAwesomeIcon icon={faTwitterSquare} style={{ color: 'blue' }}/></NavLink>*/}
+                    {/* <NavLink to={props.userProfile.contacts.github}><FontAwesomeIcon icon={faGithub} style={{ color: 'darkviolet' }}/></NavLink>*/}
+                    {/* <NavLink to={props.userProfile.contacts.instagram}><FontAwesomeIcon icon={faInstagram} style={{ color: 'red' }}/></NavLink>*/}
+                    {/* <NavLink to={props.userProfile.contacts.youtube}><FontAwesomeIcon icon={faYoutube} style={{ color: 'red' }}/></NavLink>*/}
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+)
 }
 export default ProfileInfo
