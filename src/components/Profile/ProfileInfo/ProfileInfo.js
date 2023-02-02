@@ -1,16 +1,21 @@
 import classes from "./ProfileInfo.module.css";
 import backgroundBig from '../../../images/backgroundbig.jpg'
 import userPicture from "../../../images/user.png";
-import React from "react";
+import React, {useState} from "react";
 import Preloader from "../../common/preloader";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTwitterSquare, faFacebook, faGithub, faInstagram, faYoutube} from "@fortawesome/free-brands-svg-icons"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import {ExternalLink} from 'react-external-link';
 import {NavLink} from "react-router-dom";
+import ProfileForm from "./ProfileForm/ProfileForm";
+import {FORM_ERROR} from "final-form";
+import ProfileStatus from "./ProfileStatus";
+import Button from "react-bootstrap/Button";
 
 
 const ProfileInfo = (props) => {
+    let [editMode, setEditMode] = useState(false);
     // console.log(props.userProfile)
     if (!props.userProfile) {
         return <Preloader/>
@@ -23,7 +28,29 @@ const ProfileInfo = (props) => {
 
 
     }
+    const onSubmit = async (value) => {
+        const userProfile = {
+            userId: props.authId,
+            fullName: value.fullName,
+            aboutMe: value.aboutMe,
+            lookingForAJob: value.lookingForAJob,
+            lookingForAJobDescription: value.lookingForAJobDescription,
+            contacts: {
+                facebook:value.facebook,
+                github:value.github,
+                twitter:value.twitter,
+                instagram:value.instagram,
+                youtube:value.youtube
+            }
+        }
+      let promice =await props.changeProfile(userProfile)
+if (promice===undefined) { setEditMode(false) }
+else {
+    return promice
+}
 
+
+    }
     return (
         <div>
             <div>
@@ -40,12 +67,14 @@ const ProfileInfo = (props) => {
 
                     {props.isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
                     {/*{props.isOwner && <NavLink to={'/changeProfile'}>Change profile</NavLink>}*/}
-                    <div className={classes.job}>
-                        {props.isOwner && <NavLink to={'/changeProfile'}>Change profile</NavLink>}
-                    </div>
-                </div>
 
-         <ProfileData {...props}/>
+
+                </div>
+                { editMode
+                    ? <ProfileForm {...props}  onSubmit={onSubmit}/>
+                    : <ProfileData {...props} goToEditMode={() => {setEditMode(true)} } /> }
+
+
                 {/*     className={classes.profileLogo}/>*/}
                 {/*<p>About me</p>    */}
 
@@ -58,6 +87,10 @@ return (
 
         <div className={classes.info}>
             <div className={classes.name}>{props.userProfile.fullName}</div>
+            {/*{props.isOwner && <button onClick={props.goToEditMode}>Change profile</button>}*/}
+
+            {props.isOwner && <Button variant="outline-success" color="info"  onClick={props.goToEditMode}>Change profile</Button>}
+
             <div className={classes.about}>{props.userProfile.aboutMe}</div>
             <div className={classes.job}>
                 <b>Looking for a job</b>: {props.userProfile.lookingForAJob ? "yes" : "no"}
@@ -79,21 +112,21 @@ return (
                     {!!props.userProfile.contacts.facebook &&
                         <div>
                             <ExternalLink href={props.userProfile.contacts.facebook}>
-                                <FontAwesomeIcon icon={faFacebook} style={{color: 'blue'}}/>
+                                <FontAwesomeIcon icon={faFacebook} style={{color: '#1877f2'}}/>
                             </ExternalLink>
                         </div>
                     }
                     {!!props.userProfile.contacts.twitter &&
                         <div>
                             <ExternalLink href={props.userProfile.contacts.twitter}>
-                                <FontAwesomeIcon icon={faTwitterSquare} style={{color: 'blue'}}/>
+                                <FontAwesomeIcon icon={faTwitterSquare} style={{color: '#1da1f2'}}/>
                             </ExternalLink>
                         </div>
                     }
                     {!!props.userProfile.contacts.github &&
                         <div>
                             <ExternalLink href={props.userProfile.contacts.github}>
-                                <FontAwesomeIcon icon={faGithub} style={{color: 'darkviolet'}}/>
+                                <FontAwesomeIcon icon={faGithub} style={{color: '#6e5494'}}/>
                             </ExternalLink>
                         </div>
 
@@ -101,14 +134,14 @@ return (
                     {!!props.userProfile.contacts.instagram &&
                         <div>
                             <ExternalLink href={props.userProfile.contacts.instagram}>
-                                <FontAwesomeIcon icon={faInstagram} style={{color: 'red'}}/>
+                                <FontAwesomeIcon icon={faInstagram} style={{color: '#e1306c'}}/>
                             </ExternalLink>
                         </div>
                     }
                     {!!props.userProfile.contacts.youtube &&
                         <div>
                             <ExternalLink href={props.userProfile.contacts.youtube}>
-                                <FontAwesomeIcon icon={faYoutube} style={{color: 'red'}}/>
+                                <FontAwesomeIcon icon={faYoutube} style={{color: '#ff0000'}}/>
                             </ExternalLink>
                         </div>
                     }

@@ -63,12 +63,15 @@ import React from "react";
 //     // window.alert('LOGIN SUCCESS!')
 // }
 const LoginForm = (props) => {
-    // console.log(props)
+     // console.log(props)
     const initialData = {
         email: 'aaaaa@gmail.com'
     }
-    const onSubmit = (value) => {
-        props.login(value.email, value.password, false);
+    const onSubmit = async (value) => {
+        let promice =await props.login(value.email, value.password, value.rememberMe, value.captcha);
+
+        if (promice!==undefined) {  return promice}
+
 
     }
     const validate = (value) => {
@@ -97,7 +100,9 @@ const LoginForm = (props) => {
                      }) => (
                 <form onSubmit={handleSubmit}>
                     <div>
+
                         <label>Login</label>
+
                         {/*<Field name="login" component="input" placeholder="Login" />*/}
                         {/*<Field*/}
                         {/*    name="login"*/}
@@ -134,6 +139,22 @@ const LoginForm = (props) => {
                         <Field name="rememberMe" component="input" type="checkbox"/>
 
                     </div>
+                    {props.captchaUrl && (
+                        <img className={classes.captcha} src={props.captchaUrl}/>
+                    )}
+                    {props.captchaUrl && (
+                        <Field name="captcha">
+                            {({input, meta}) => (
+                                <div>
+                                    <input type="text" {...input} placeholder="symbols from picture"/>
+                                    {meta.touched && meta.error && <span className={classes.error}>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
+                    )}
+                    {submitError && (
+                        <div className={classes.error}>{submitError}</div>
+                    )}
                     <div>
                         <button type="submit">Login</button>
                     </div>
@@ -154,6 +175,7 @@ const Login = (props) => {
     )
 }
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl:state.auth.captchaUrl
 })
 export default connect(mapStateToProps, {login, logout})(Login);

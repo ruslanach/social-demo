@@ -2,6 +2,7 @@ import classes from './Users.module.css';
 import React from "react";
 import userPicture from '../../images/user.png'
 import {NavLink} from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 
 const User = (props) => {
@@ -20,10 +21,10 @@ const User = (props) => {
 
                             {
                                 user.followed
-                                    ? <button disabled={props.followingInProgress.some(id=>id===user.id)} className={classes.follow}
-                                              onClick={()=>{ props.unfollow(user.id);}}>Unfollow</button>
-                                    : <button disabled={props.followingInProgress.some(id=>id===user.id)} className={classes.follow}
-                                               onClick={()=>{props.follow(user.id)}}>Follow</button>
+                                    ? <Button variant="outline-info" disabled={props.followingInProgress.some(id=>id===user.id)} className={classes.follow}
+                                              onClick={()=>{ props.unfollow(user.id);}}>Unfollow</Button>
+                                    : <Button variant="outline-success" disabled={props.followingInProgress.some(id=>id===user.id)} className={classes.follow}
+                                               onClick={()=>{props.follow(user.id)}}>Follow</Button>
                             }
 
                         </div>

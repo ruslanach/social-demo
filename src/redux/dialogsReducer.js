@@ -32,7 +32,7 @@ if (action !== undefined) {
             let newMessage = {
                 id: state.messageData.length + 1,
                 message: state.newMessageText,
-                idUser: 4
+                idUser: action.idUser
             };
             stateCopy.messageData = [...state.messageData,newMessage]
             stateCopy.newMessageText = '';
@@ -58,7 +58,7 @@ if (action !== undefined) {
 }
     return stateCopy;
 }
-export const addMessage = () => ({type: ADD_MESSAGE})
+export const addMessage = (idUser) => ({type: ADD_MESSAGE,idUser})
 export const updateNewMessageText = (text) =>
     ({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text})
 export const updateCurrentUser = (idUser) =>

@@ -1,4 +1,5 @@
 import {profileAPI} from "../api/api";
+import {FORM_ERROR} from "final-form";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -78,13 +79,15 @@ export const savePhotoSuccess = (photos) =>  ({type: SAVE_PHOTO_SUCCESS,photos})
 export const putUserProfile =(userId) => async (dispatch) =>{
 
     dispatch(setIsFetching(true));
-    let data = await profileAPI.getProfile(userId);
+    const data = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(data));
     dispatch(setIsFetching(false));
 
 
 }
-
+// export const submitError = (message) => {
+//     return message;
+// }
 export const changeProfile = (userProfile) => async (dispatch) => {
 
     dispatch(setIsFetching(true));
@@ -97,28 +100,33 @@ export const changeProfile = (userProfile) => async (dispatch) => {
         const userId = userProfile.userId;
         dispatch(putUserProfile(userId));
         dispatch(setIsFetching(false));
-    }
 
+    }
+    else {
+        let message = response.messages.length > 0 ? response.messages[0] : "Some error";
+        return { [FORM_ERROR]: message}
+
+    }
 
 
 }
 export const putUserStatus = (status) => async (dispatch) => {
     dispatch(setIsFetching(true));
-    let data = await profileAPI.putStatus(status);
-    dispatch(setUserStatus(data));
+    const data = await profileAPI.putStatus(status);
+    dispatch(setUserStatus(status));
     dispatch(setIsFetching(false));
 
 }
 export const getUserStatus = (userId) => async (dispatch) => {
 
-    let data = await profileAPI.getStatus(userId);
+    const data = await profileAPI.getStatus(userId);
     dispatch(setUserStatus(data));
     // dispatch(setIsFetching(false));
 
 }
 export const savePhoto = (fileName) => async (dispatch) => {
 
-    let data = await profileAPI.savePhotoFromFile(fileName);
+    const data = await profileAPI.savePhotoFromFile(fileName);
 
     if (data.resultCode === 0) {
         dispatch(savePhotoSuccess(data.data.photos));

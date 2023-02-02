@@ -2,6 +2,7 @@
 import '../Message/Message'
 import Message from "../Message/Message";
 import React from "react";
+import Button from "react-bootstrap/Button";
 // import {useParams} from "react-router-dom";
 const Messages=(props) => {
     // const match  = {params: useParams()};
@@ -17,7 +18,7 @@ const Messages=(props) => {
     let refMessageElement=React.createRef()
     let onAddMessage = () => {
 
-        props.addMessage();
+        props.addMessage(idUser);
 
     }
     let onMessageChange = () => {
@@ -36,7 +37,7 @@ const Messages=(props) => {
                                   value={props.newMessageText}></textarea>
                     </div>
                     <div>
-                        <button onClick={onAddMessage}>Add message</button>
+                        <Button variant="outline-success" onClick={onAddMessage}>Add message</Button>
                     </div>
 
 

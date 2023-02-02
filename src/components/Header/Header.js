@@ -2,6 +2,7 @@ import classes from './Header.module.css';
 import euro from '../../images/euro.png'
 import { NavLink} from "react-router-dom";
 import React from "react";
+import Button from "react-bootstrap/Button";
 
 const Header=(props) =>{
     // console.log('login')
@@ -19,7 +20,7 @@ const Header=(props) =>{
             {props.auth.login}
         </div>
             <div>
-                <button onClick={props.logout}>Logout</button>
+                <Button variant="outline-primary" onClick={props.logout}>Logout</Button>
                 {/*<Navigate to={'/profile'}/>*/}
             </div>
 

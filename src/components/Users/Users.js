@@ -1,14 +1,14 @@
 
 import React from "react";
 import User from "./User";
-import Paginator from "../common/Paginator/Pajinator";
+import PaginatorNew from "../common/Paginator/PajinatorNew";
 
 let Users = (props) => {
 
 
     return (
         <div>
-            <Paginator {...props}/>
+            <PaginatorNew {...props}/>
             <User {...props}/>
         </div>
     )

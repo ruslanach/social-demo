@@ -2,6 +2,7 @@ import classes from "./Post.module.css";
 
 import circle from '../../../../images/circle.jpg'
 import React from "react";
+import Button from "react-bootstrap/Button";
 
 const Post =(props) => {
     let deletePost = () => {
@@ -19,7 +20,7 @@ const Post =(props) => {
 
             <p>{props.message}</p>
             <div>
-                <button onClick={deletePost}>Delete</button>
+                <Button variant="outline-danger" onClick={deletePost}>Delete</Button>
             </div>
         </div>
             <div className={classes.postLike}>

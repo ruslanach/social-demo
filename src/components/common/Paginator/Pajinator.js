@@ -1,5 +1,4 @@
 import classes from "./Paginator.module.css";
-
 import React, {useState} from "react";
 
 let Paginator = (props) => {
@@ -47,7 +46,11 @@ let Paginator = (props) => {
                     .map((p) => {
                         return <div className={classes.numberPage} key={p}>
                             <span
-                                className={props.currentPage === p && classes.selectedPage}
+                                // className={ cn({
+                                //     [classes.selectedPage]: props.currentPage === p
+                                // }, classes.numberPage) }
+                                className={props.currentPage === p ? classes.selectedPage:null}
+                                 // className={props.currentPage === p && classes.selectedPage}
                                 onClick={(e) => {
                                     props.onChangePages(p);
                                 }}>{p}</span>

@@ -1,6 +1,7 @@
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import React from "react";
+import Button from "react-bootstrap/Button";
 const MyPosts = React.memo((props) => {
 
     let refPostElement = React.createRef();
@@ -27,7 +28,7 @@ const MyPosts = React.memo((props) => {
                     <textarea onChange={onPostChange} ref={refPostElement} cols="30" value={props.posts.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={onAddPost}>Add post</button>
+                    <Button variant="outline-success" onClick={onAddPost}>Add post</Button>
                 </div>
 
 

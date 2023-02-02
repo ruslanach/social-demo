@@ -17,6 +17,7 @@ import Preloader from "./components/common/preloader";
 import store from "./redux/reduxStore";
  import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileForm from "./components/Profile/ProfileInfo/ProfileForm/ProfileForm";
+import ErrorPage from "./components/common/ErrorPage";
 
 // import {withSuspense} from './hoc/withSuspense'
 // const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
@@ -25,9 +26,17 @@ import ProfileForm from "./components/Profile/ProfileInfo/ProfileForm/ProfileFor
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 class App extends Component {
+    catchAllUnhandledErrors =()=>{
+        alert('Some error occured')
+    }
     componentDidMount() {
         this.props.initializeApp();
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+
     render() {
         if (this.props.initialized) {
             return (
@@ -56,8 +65,10 @@ class App extends Component {
 
                         <div className='app-wrapper-content'>
                             <Routes>
-                                <Route path="/profile/:userId" element={<ProfileContainer/>}/>
-                                <Route path="/profile/*" element={<ProfileContainer/>}/>
+                                <Route exact path="/" element={<ProfileContainer/>}/>
+
+                                <Route exact path="/profile/:userId" element={<ProfileContainer/>}/>
+                                <Route exact path="/profile/*" element={<ProfileContainer/>}/>
                                 <Route path="/dialogs/:userId" element={<DialogsContainer/>}/>
                                 <Route exact path="/dialogs/*" element={<DialogsContainer/>}/>
                                 {/*<Route path="/messages/:userId" element={<MessagesContainer/>}/>*/}
@@ -69,7 +80,8 @@ class App extends Component {
                                 <Route path="/users/*" element={<UsersContainer/>}/>
                                 <Route path="/login/" element={<Login/>}/>
                                 <Route path="/changeProfile/" element={<ProfileForm/>}/>
-                                <Route path="/external-link" element={<External />}/>
+                                <Route path="*" element={<ErrorPage/>} />
+
                             </Routes>
 
                         </div>
@@ -79,11 +91,7 @@ class App extends Component {
         } else {return <Preloader />}
     }
 }
-let External =(props)=> {
-    // window.location.href = props;
-    window.location.href = 'https://google.com';
-    return null;
-}
+
 let mapStateToProps =(state) =>{
 
     return {
