@@ -25,7 +25,7 @@ const MyPosts = React.memo((props) => {
         <div>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} ref={refPostElement} cols="30" value={props.posts.newPostText}/>
+                    <textarea onChange={onPostChange} ref={refPostElement} cols="70" value={props.posts.newPostText}/>
                 </div>
                 <div>
                     <Button variant="outline-success" onClick={onAddPost}>Add post</Button>

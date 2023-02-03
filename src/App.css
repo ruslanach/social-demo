@@ -46,6 +46,7 @@
   grid-template-rows: 100px 1fr;
   grid-auto-columns: 2fr 10fr;
   grid-gap: 10px;
+  /*background-color:#d6fffc ;*/
 }
 .app-wrapper-content{
   grid-area: c;

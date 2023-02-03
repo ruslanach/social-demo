@@ -26,16 +26,16 @@ import ErrorPage from "./components/common/ErrorPage";
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 class App extends Component {
-    catchAllUnhandledErrors =()=>{
-        alert('Some error occured')
-    }
+    // catchAllUnhandledErrors =()=>{
+    //     alert('Some error occured')
+    // }
     componentDidMount() {
         this.props.initializeApp();
-        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+        // window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
-    componentWillUnmount() {
-        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
-    }
+    // componentWillUnmount() {
+    //     window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    // }
 
     render() {
         if (this.props.initialized) {
@@ -80,7 +80,7 @@ class App extends Component {
                                 <Route path="/users/*" element={<UsersContainer/>}/>
                                 <Route path="/login/" element={<Login/>}/>
                                 <Route path="/changeProfile/" element={<ProfileForm/>}/>
-                                <Route path="*" element={<ErrorPage/>} />
+                                {/*<Route path="*" element={<ErrorPage/>} />*/}
 
                             </Routes>
 
