@@ -7,10 +7,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTwitterSquare, faFacebook, faGithub, faInstagram, faYoutube} from "@fortawesome/free-brands-svg-icons"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import {ExternalLink} from 'react-external-link';
-import {NavLink} from "react-router-dom";
 import ProfileForm from "./ProfileForm/ProfileForm";
-import {FORM_ERROR} from "final-form";
-import ProfileStatus from "./ProfileStatus";
+
 import Button from "react-bootstrap/Button";
 
 

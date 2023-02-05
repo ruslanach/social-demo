@@ -12,6 +12,17 @@
     text-decoration: none;
 
 }
+
+@media only screen and (max-width : 768px) {
+    .nav{
+        grid-area: n;
+        background-color: mediumaquamarine;
+        display: inline-flex;
+        height: 10vh;
+        min-height: 10vh;
+    }
+}
+
 /*.item a.active{*/
 /*    color: gold;*/
 /*}*/

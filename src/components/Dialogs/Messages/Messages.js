@@ -13,8 +13,7 @@ const Messages=(props) => {
     //     setCurrentUserId(props.currentUserId)
     // ),[props.currentUserId])
    // let messageItems =props.dialogs.messageData.map(message=><Message messageText ={message.message} key={message.id} idUser={message.idUser} id={message.id}/>)
-    let messageItemsFilter =props.dialogs.messageData.filter(m=>m.idUser===idUser)
-    let messageItems =props.dialogs.messageData.filter(m=>m.idUser===idUser).map(message=><Message messageText ={message.message} key={message.id} idUser={message.idUser} id={message.id}/>)
+     let messageItems =props.dialogs.messageData.filter(m=>m.idUser===idUser).map(message=><Message messageText ={message.message} key={message.id} idUser={message.idUser} id={message.id}/>)
     let refMessageElement=React.createRef()
     let onAddMessage = () => {
 

@@ -17,7 +17,6 @@ import Preloader from "./components/common/preloader";
 import store from "./redux/reduxStore";
  import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileForm from "./components/Profile/ProfileInfo/ProfileForm/ProfileForm";
-import ErrorPage from "./components/common/ErrorPage";
 
 // import {withSuspense} from './hoc/withSuspense'
 // const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))

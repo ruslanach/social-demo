@@ -3,6 +3,9 @@ import classes from "./Login.module.css";
 import {connect} from "react-redux";
 import {login, logout} from "../../redux/authReducer";
 import React from "react";
+import {Navigate} from "react-router-dom";
+
+
 
 // const MyForm = () => (
 //     <Form
@@ -68,11 +71,12 @@ const LoginForm = (props) => {
         email: 'aaaaa@gmail.com'
     }
     const onSubmit = async (value) => {
-        let promice =await props.login(value.email, value.password, value.rememberMe, value.captcha);
+        let promice = await props.login(value.email, value.password, value.rememberMe, value.captcha);
 
-        if (promice!==undefined) {  return promice}
-
-
+        if (promice !== undefined) {
+            return promice
+        }
+        // else {  return <Navigate to={'/profile'}/> }
     }
     const validate = (value) => {
 
@@ -85,7 +89,9 @@ const LoginForm = (props) => {
         }
         return errors;
     }
+    if (props.isAuth) {return <Navigate to={'/profile'}/> }
     return (
+
         <Form
             onSubmit={onSubmit}
             validate={validate}
@@ -140,7 +146,7 @@ const LoginForm = (props) => {
 
                     </div>
                     {props.captchaUrl && (
-                        <img className={classes.captcha} src={props.captchaUrl}/>
+                        <img className={classes.captcha} src={props.captchaUrl} alt={'captcha'}/>
                     )}
                     {props.captchaUrl && (
                         <Field name="captcha">

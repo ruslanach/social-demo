@@ -112,7 +112,7 @@ export const changeProfile = (userProfile) => async (dispatch) => {
 }
 export const putUserStatus = (status) => async (dispatch) => {
     dispatch(setIsFetching(true));
-    const data = await profileAPI.putStatus(status);
+    await profileAPI.putStatus(status);
     dispatch(setUserStatus(status));
     dispatch(setIsFetching(false));
 
