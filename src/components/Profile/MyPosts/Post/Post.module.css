@@ -16,3 +16,14 @@
 .postLike{
     color: green;
 }
+
+
+
+@media only screen and (max-width : 360px) {
+    .post{
+
+        display: block;
+
+
+    }
+}

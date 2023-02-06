@@ -21,7 +21,26 @@
         height: 10vh;
         min-height: 10vh;
     }
+    .item {
+        padding: 2px 5px;
+
+    }
 }
+@media only screen and (max-width : 360px) {
+    .nav{
+        grid-area: n;
+        background-color: mediumaquamarine;
+        display: flex;
+        height: 5vh;
+        min-height: 5vh;
+    }
+    .item {
+        padding: 1px 3px;
+        font-size: 0.8rem;
+
+    }
+}
+
 
 /*.item a.active{*/
 /*    color: gold;*/

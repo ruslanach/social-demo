@@ -20,7 +20,7 @@ const Post =(props) => {
 
             <p>{props.message}</p>
             <div>
-                <Button variant="outline-danger" onClick={deletePost}>Delete</Button>
+                <Button variant="outline-danger" onClick={deletePost}  size="sm">Delete</Button>
             </div>
         </div>
             <div className={classes.postLike}>

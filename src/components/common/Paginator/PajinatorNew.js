@@ -18,7 +18,7 @@ let PaginatorNew = (props) => {
 
     return (
         <div className={classes.paginator}>
-        <Pagination>
+        <Pagination size="sm">
 
 
                 { portionNumber > 1 &&

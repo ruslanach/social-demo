@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {login, logout} from "../../redux/authReducer";
 import React from "react";
 import {Navigate} from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 
 
@@ -162,7 +163,10 @@ const LoginForm = (props) => {
                         <div className={classes.error}>{submitError}</div>
                     )}
                     <div>
-                        <button type="submit">Login</button>
+                        <Button variant="primary" type="submit" color="info"  size="lg">
+                            Login
+                        </Button>
+
                     </div>
                 </form>
             )}

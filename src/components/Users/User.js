@@ -30,7 +30,7 @@ const User = (props) => {
                         </div>
 
                         <div className={classes.userName}>
-                            <div>
+                            <div >
                                 <div className={classes.name}>{user.name}</div>
                                 <div className={classes.info}>{user.status}</div>
 

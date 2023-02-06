@@ -1,11 +1,12 @@
-.header{
+.header {
     grid-area: h;
     background-color: mediumaquamarine;
 
 
 }
-.img{
-/*width: 3em;*/
+
+.img {
+    /*width: 3em;*/
     margin: 0 auto;
     /*background: mediumaquamarine;*/
     vertical-align: center;
@@ -17,15 +18,47 @@
 
 
 }
-.loginBlock{
-   float: right;
+
+.loginBlock {
+    float: right;
     margin: 10px;
 }
-.loginBlock a{
+
+.loginBlock a {
     color: white;
 
 }
-.loginBlock div{
+
+.loginBlock div {
     color: white;
 
+}
+
+
+@media only screen and (max-width: 768px) {
+    .img {
+        padding: 5px;
+        width: 50px;
+        height: 50px;
+        vertical-align: center;
+   }
+    .loginBlock {
+        float: initial;
+        margin: 5px;
+        display: inline-flex;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .img {
+        padding: 5px;
+        width: 50px;
+        height: 50px;
+        /*vertical-align: center;*/
+    }
+    .loginBlock {
+        float: initial;
+        /*margin: 5px;*/
+        display:inline-flex;
+    }
 }

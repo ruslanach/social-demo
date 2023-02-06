@@ -44,8 +44,8 @@ margin: 5px;
 
 .paginator {
     display: flex;
-    justify-content: center;
-    margin: 10px;
+    /*justify-content: center;*/
+    margin: 2px;
 
 }
 .pageNumber {

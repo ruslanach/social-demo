@@ -3,6 +3,7 @@ import '../Message/Message'
 import Message from "../Message/Message";
 import React from "react";
 import Button from "react-bootstrap/Button";
+import classes from "./Messages.module.css";
 // import {useParams} from "react-router-dom";
 const Messages=(props) => {
     // const match  = {params: useParams()};
@@ -32,7 +33,7 @@ const Messages=(props) => {
             <div>
                 <div>
                     <div>
-                        <textarea onChange={onMessageChange} ref={refMessageElement} cols="60"
+                        <textarea onChange={onMessageChange} ref={refMessageElement} cols="60" className={classes.textMessage}
                                   value={props.newMessageText}></textarea>
                     </div>
                     <div>
