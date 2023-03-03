@@ -1,7 +1,9 @@
 import clock from "../../images/clock.gif";
 import React from "react";
 
-const Preloader =(props) =>{
+type PropsType = {
+}
+const Preloader: React.FC =(props) =>{
     return (
         <div>
             <img src={clock} alt={'preloader'}/>
