@@ -1,0 +1,9 @@
+.error {
+    color:darkred;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.captcha{
+    width: 100px;
+    height:100px ;
+}
