@@ -1,15 +1,9 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
+const ADD_MESSAGE = 'SN/DIALOGS/ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'SN/DIALOGS/UPDATE-NEW-MESSAGE-TEXT';
 const UPDATE_CURRENT_USER = 'SN/DIALOGS/UPDATE_CURRENT_USER';
-type DialogType = {
-    id: number
-    name: string
-}
-type MessageType = {
-    id: number
-    idUser: number
-    message: string
-}
+import {DialogType, MessageType} from "../types/types";
+
+
 
 let initialState ={
     dialogsData: [
@@ -28,7 +22,7 @@ let initialState ={
         {id: 6, idUser: 3, message: 'Andrii 1'},
         {id: 7, idUser: 4, message: 'Diana 1'}] as Array<MessageType>,
     newMessageText: 'new message',
-    currentUserId: null as string | null
+    currentUserId: null as number | null
 };
 export type InitialStateType = typeof initialState;
 export const dialogsReducer =(state=initialState, action :any):InitialStateType=>{

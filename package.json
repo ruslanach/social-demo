@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@types/query-string": "^6.3.0",
     "gh-pages": "^5.0.0"
   }
 }

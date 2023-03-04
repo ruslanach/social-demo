@@ -5,21 +5,52 @@ import {changeProfile, getUserStatus, putUserProfile, putUserStatus, savePhoto} 
 import {useParams} from 'react-router-dom'
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import { withRouter } from '../../utilits/servisFunctions';
+import {DialogType, MessageType,  ProfileType} from "../../types/types";
+import {AppStateType} from "../../redux/reduxStore";
 
-export function withRouter(Children) {
-    return (props) => {
+// export function withRouter(Children) {
+//     return (props) => {
+//
+//         const match = {params: useParams()};
+//         return <Children {...props} match={match}/>
+//     }
+// }
 
-        const match = {params: useParams()};
-        return <Children {...props} match={match}/>
-    }
+type MapDispatchToPropsType={
+
+    putUserProfile : (userId: number) => void
+    getUserStatus : (userId: number) => void
+    putUserStatus : (status: string) => void
+    savePhoto : (photo: File) => void
+    changeProfile : (profile: ProfileType) => void
+
 }
+type MapStateToPropsType={
 
-class ProfileContainer extends React.Component {
+    userProfile: ProfileType | null
+    isFetching: boolean
+    status: string
+    authId: number | null
+    isAuth: boolean
+
+}
+type OwnPropsType={
+    match: {
+        params: {
+            userId: string;
+        };
+    }}
+
+type PropsType=MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
+class ProfileContainer extends React.Component<PropsType> {
     // constructor(props) {
     //     super(props);
     // }
     refreshProfile ()  {
-        let userId = this.props.match.params.userId;
+
+type userIdType = number | null
+        let userId:userIdType = parseInt(this.props.match.params.userId);
         if (!userId) {
             if (this.props.isAuth) {
                 userId = this.props.authId;
@@ -30,8 +61,10 @@ class ProfileContainer extends React.Component {
             //
 
         }
-        this.props.putUserProfile(userId);
-        this.props.getUserStatus(userId);
+        if (userId) {
+            this.props.putUserProfile(userId);
+            this.props.getUserStatus(userId);
+        }
     }
 
     componentDidMount() {
@@ -40,8 +73,8 @@ class ProfileContainer extends React.Component {
 
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.match.params.userId !==prevProps.match.params.userId) {
+    componentDidUpdate(prevProps:PropsType, prevState:AppStateType, snapshot:any) {
+        if (parseInt(this.props.match.params.userId)!==parseInt(prevProps.match.params.userId)) {
             this.refreshProfile ();
         }
 
@@ -52,7 +85,7 @@ class ProfileContainer extends React.Component {
 // console.log(this.props)
         return (
             <div>
-                <Profile {...this.props} isOwner ={!this.props.match.params.userId} />
+                <Profile {...this.props} isOwner ={!parseInt(this.props.match.params.userId)} />
 
             </div>
         )
@@ -69,7 +102,7 @@ class ProfileContainer extends React.Component {
 //         isAuth:state.auth.isAuth
 //     }
 // }
-let mapStateToProps = (state) => {
+let mapStateToProps = (state:AppStateType):MapStateToPropsType => {
     return {
         userProfile: state.profile.userProfile,
         isFetching: state.profile.isFetching,
@@ -79,7 +112,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {putUserProfile, getUserStatus, putUserStatus,savePhoto,changeProfile}),
     withRouter,
     withAuthRedirect)(ProfileContainer)

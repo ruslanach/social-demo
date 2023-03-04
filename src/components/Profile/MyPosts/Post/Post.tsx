@@ -3,8 +3,16 @@ import classes from "./Post.module.css";
 import circle from '../../../../images/circle.jpg'
 import React from "react";
 import Button from "react-bootstrap/Button";
+import {PostDataType} from "../../../../types/types";
+type PropsType = {
 
-const Post =(props) => {
+    message:string
+    likesCount:number
+    id:number
+    deletePost: (userId: number) => void
+
+}
+const Post: React.FC<PropsType> =(props) => {
     let deletePost = () => {
 
         props.deletePost(props.id);

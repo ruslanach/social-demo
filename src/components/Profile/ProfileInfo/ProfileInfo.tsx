@@ -10,15 +10,28 @@ import {ExternalLink} from 'react-external-link';
 import ProfileForm from "./ProfileForm/ProfileForm";
 
 import Button from "react-bootstrap/Button";
+import { ProfileFormType, ProfileType} from "../../../types/types";
 
-
-const ProfileInfo = (props) => {
+type PropsType = {
+    userProfile: ProfileType | null
+    isFetching: boolean
+    status: string
+    authId: number | null
+    isAuth: boolean
+    putUserProfile : (userId: number) => void
+    getUserStatus : (userId: number) => void
+    putUserStatus : (status: string) => void
+    savePhoto : (photo: File) => void
+    changeProfile : (profile: ProfileType) => void
+    isOwner: boolean
+}
+const ProfileInfo: React.FC<PropsType> = (props) => {
     let [editMode, setEditMode] = useState(false);
     // console.log(props.userProfile)
     if (!props.userProfile) {
         return <Preloader/>
     }
-    const mainPhotoSelected = (e) => {
+    const mainPhotoSelected = (e:any) => {
 
         if (e.target.files.length) {
             props.savePhoto(e.target.files[0]);
@@ -26,8 +39,8 @@ const ProfileInfo = (props) => {
 
 
     }
-    const onSubmit = async (value) => {
-        const userProfile = {
+    const onSubmit = async (value:ProfileFormType) => {
+        const userProfile:ProfileType = {
             userId: props.authId,
             fullName: value.fullName,
             aboutMe: value.aboutMe,
@@ -57,11 +70,11 @@ else {
                     alt="main-content" className={classes.profileImg}/>
             </div>
             {/*<ProfileStatus {...props}/>*/}
-            <ProfileStatusWithHooks {...props}/>
+            <ProfileStatusWithHooks status={props.status} putUserStatus={props.putUserStatus}/>
             <div className={classes.profileInfo}>
                 <div>
                     <img className={classes.profileLogo} alt={'userPicture'}
-                         src={props.userProfile.photos.large != null ? props.userProfile.photos.large : userPicture}/>
+                         src={(props.userProfile.photos.large != null && props.userProfile.photos.large != undefined  )? props.userProfile.photos.large : userPicture}/>
 
                     {props.isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
                     {/*{props.isOwner && <NavLink to={'/changeProfile'}>Change profile</NavLink>}*/}
@@ -80,7 +93,11 @@ else {
         </div>
     )
 }
-const ProfileData =(props) =>{
+type OwnPropsType = {
+    goToEditMode: () => void
+}
+type PropsProfileDataType = PropsType & OwnPropsType
+const ProfileData: React.FC<PropsProfileDataType>  =(props) =>{
 return (
 
         <div className={classes.info}>

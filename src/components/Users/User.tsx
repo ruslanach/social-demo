@@ -17,7 +17,7 @@ type PropsType ={
 
 }
 
-const User : React.FC<PropsType>  = (props) => {
+const User: React.FC<PropsType>  = (props) => {
 console.log(props);
 
     return (

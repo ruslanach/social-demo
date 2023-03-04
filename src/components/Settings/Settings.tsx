@@ -1,5 +1,11 @@
 // import classes from "./Settings.module.css";
-const Settings =(props)=> {
+import React from "react";
+
+type PropsType ={
+
+
+}
+const Settings: React.FC<PropsType>  =(props)=> {
     return (
         <div>
             Settings

@@ -1,5 +1,5 @@
 import {addPost, deletePost, profileReducer} from "./profileReducer";
-type PostsDataType = {
+type PostDataType = {
     id: number
     post: string
     likesCount: number
@@ -13,7 +13,7 @@ let state ={
         {id: 1, post: 'Post1', likesCount: 5},
         {id: 2, post: 'Post2', likesCount: 7},
         {id: 3, post: 'Post3', likesCount: 12}
-    ] as Array<PostsDataType>,
+    ] as Array<PostDataType>,
      status:'',
      newPostText: 'test post',
 

@@ -1,8 +1,11 @@
 
 import React, {useEffect, useState} from "react";
 import classes from "./ProfileInfo.module.css";
-
-const ProfileStatusWithHooks = (props)=> {
+type PropsType = {
+    status: string
+    putUserStatus: (status: string) => void
+}
+const ProfileStatusWithHooks: React.FC<PropsType> = (props)=> {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
     useEffect(()=>(
@@ -16,7 +19,7 @@ const ProfileStatusWithHooks = (props)=> {
         setEditMode(false);
         props.putUserStatus(status);
     }
-    const onStatusChange =(e)=>{
+    const onStatusChange =(e:any)=>{
         setStatus(e.currentTarget.value);
 
     }

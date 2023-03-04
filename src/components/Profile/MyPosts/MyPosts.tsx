@@ -2,9 +2,18 @@ import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import React from "react";
 import Button from "react-bootstrap/Button";
-const MyPosts = React.memo((props) => {
+import {PostDataType} from "../../../types/types";
+type PropsType = {
+    postsData:Array<PostDataType>
+    newPostText:string
+    addPost: () => void
+    updateNewPost: (text: string) => void
+    deletePost: (userId: number) => void
 
-    let refPostElement = React.createRef();
+}
+const MyPosts: React.FC<PropsType> = React.memo((props) => {
+
+    let refPostElement = React.createRef<HTMLTextAreaElement>();
 
     let onAddPost = () => {
 
@@ -12,20 +21,21 @@ const MyPosts = React.memo((props) => {
 
     }
     let onPostChange = () => {
+        let text: string | undefined = refPostElement.current?.value;
+        if (text) {
+            props.updateNewPost(text);
+        }
 
-        let text = refPostElement.current.value;
-
-        props.updateNewPost(text);
     }
     // let postItem = props.posts.postsData.map(post => <Post message={post.post} likesCount={post.likesCount}
     //                                                       key={post.id} id={post.id} {...props}/>);
-    let postItem = props.posts.postsData.map(post => <Post message={post.post} likesCount={post.likesCount}
+    let postItem = props.postsData.map(post => <Post message={post.post} likesCount={post.likesCount}
                                                            key={post.id} id={post.id} deletePost={props.deletePost}/>);
     return (
         <div>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} ref={refPostElement} cols="70" value={props.posts.newPostText}/>
+                    <textarea onChange={onPostChange} ref={refPostElement} cols={parseInt("70")} value={props.newPostText}/>
                 </div>
                 <div>
                     <Button variant="outline-success" onClick={onAddPost}>Add post</Button>

@@ -1,6 +1,6 @@
 import {profileAPI} from "../api/api";
 import {FORM_ERROR} from "final-form";
-import {PhotosType, PostType, ProfileType} from '../types/types';
+import {PhotosType, PostDataType,  ProfileType} from '../types/types';
 
 const ADD_POST = 'SN/PROFILE/ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'SN/PROFILE/UPDATE-NEW-POST-TEXT';
@@ -10,7 +10,6 @@ const TOGGLE_IS_FETCHING='SN/PROFILE/TOGGLE_IS_FETCHING'
 const DELETE_POST='SN/PROFILE/DELETE_POST'
 const SAVE_PHOTO_SUCCESS='SN/PROFILE/SAVE_PHOTO_SUCCESS'
 
-
 let initialState ={
     userProfile: null as ProfileType | null,
     isFetching: false,
@@ -18,7 +17,7 @@ let initialState ={
         {id: 1, post: 'Post1', likesCount: 5},
         {id: 2, post: 'Post2', likesCount: 7},
         {id: 3, post: 'Post3', likesCount: 12}
-    ] as Array<PostType>,
+    ] as Array<PostDataType>,
     newPostText: 'new post',
     status:''
 };

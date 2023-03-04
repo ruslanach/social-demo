@@ -6,8 +6,22 @@ import {changeProfile} from "../../../../redux/profileReducer";
 import {faFacebook, faGithub, faInstagram, faTwitterSquare, faYoutube} from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Button from 'react-bootstrap/Button';
-
-const ProfileFormData = (props) => {
+import {ProfileFormType, ProfileType} from "../../../../types/types";
+type PropsType = {
+    userProfile: ProfileType | null
+    isFetching: boolean
+    status: string
+    authId: number | null
+    isAuth: boolean
+    onSubmit: (value: ProfileFormType) => void
+    putUserProfile : (userId: number) => void
+    getUserStatus : (userId: number) => void
+    putUserStatus : (status: string) => void
+    savePhoto : (photo: File) => void
+    changeProfile : (profile: ProfileType) => void
+    isOwner: boolean
+}
+const ProfileFormData: React.FC<PropsType> = (props) => {
    // console.log(props)
     const initialProfile = {
         userId: props.authId,
@@ -44,9 +58,12 @@ const ProfileFormData = (props) => {
     //     props.changeProfile(userProfile);
     //     // onEdit();
     // }
-    const validate = (value) => {
-
-        const errors = {};
+    const validate = (value:ProfileFormType) => {
+type ErrorsType = {
+    fullName?: undefined | string| null
+    aboutMe?: undefined | string| null
+}
+        const errors:ErrorsType= {};
         if (!value.fullName) {
             errors.fullName = 'Required'
         }
@@ -107,7 +124,7 @@ const ProfileFormData = (props) => {
                         <Field name="lookingForAJobDescription">
                             {({input, meta}) => (
                                 <div className={classes.textArea}>
-                                    <textarea rows="5" cols="50" {...input} placeholder="My professional skills"/>
+                                    <textarea rows={parseInt("5")} cols={parseInt("50")} {...input} placeholder="My professional skills"/>
 
                                 </div>
                             )}
@@ -119,7 +136,7 @@ const ProfileFormData = (props) => {
                         <Field name="aboutMe">
                             {({input, meta}) => (
                                 <div>
-                                    <textarea rows="5" cols="50" type="text" {...input} placeholder="About me"/>
+                                    <textarea rows={parseInt("5")} cols={parseInt("50")} type="text" {...input} placeholder="About me"/>
                                     {meta.touched && meta.error && <span className={classes.error}>{meta.error}</span>}
                                 </div>
                             )}

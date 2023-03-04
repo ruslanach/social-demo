@@ -1,9 +1,16 @@
 import classes from "./Dialog.module.css";
 import {NavLink} from "react-router-dom";
+import {UserType} from "../../../types/types";
+import React from "react";
+
+type PropsType ={
+    id: number
+    name: string
 
 
+}
 
-const Dialog=(props) =>{
+const Dialog: React.FC<PropsType> =(props) =>{
 
     let path='/dialogs/'+props.id;
 // const onClick =()=>{

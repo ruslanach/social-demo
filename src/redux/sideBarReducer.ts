@@ -1,8 +1,4 @@
-type SideBarDataType = {
-    id: number
-    sideBarName: string
-    sideBarPath: string
-}
+import {SideBarDataType} from "../types/types";
 let initialState={
     sideBarData: [
         {id: 1, sideBarName: 'Profile', sideBarPath: '/profile'},
